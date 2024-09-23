@@ -1,0 +1,527 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "ff6485a5-7e57-43c8-8537-02820c0806c1",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "##OLS (Ordinary Least Squares), Türkçeye \"En Küçük Kareler Yöntemi\" olarak çevrilen, \n",
+    "#doğrusal regresyon modellerini tahmin etmek için kullanılan temel bir istatistiksel tekniktir.\n",
+    "#OLS modeli, bağımlı bir değişkenin (hedef değişken) bir veya daha fazla bağımsız değişken (girdi değişkenleri)\n",
+    "#tarafından nasıl etkilendiğini anlamak ve tahmin etmek için kullanılır.\n",
+    "#OLS Modelinin Temel Amacı\n",
+    "#OLS'nin temel amacı, bağımsız değişkenlerin bir dizi gözlemi için bağımlı değişkeni en iyi şekilde tahmin eden doğrusal bir ilişkiyi bulmaktır.\n",
+    "#Bu ilişkiyi şu şekilde ifade edebiliriz:\n",
+    "\n",
+    "#𝑌=𝛽0+𝛽1𝑋1+𝛽2𝑋2+…+𝛽𝑛𝑋𝑛+𝜖"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "a26c79cf-3891-41ff-8c62-5e010a099e94",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#Basit Lineer Regresyon için:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "d0919fc4-a15f-4387-8726-6c221e898b17",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#lm = smf.ols(\"sales ~ TV\", df) bu sekilde Tv sutunu sales diye yeniden adlandırabiliriz"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 29,
+   "id": "d2159750-1338-440f-a4ec-4203de92316d",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<table class=\"simpletable\">\n",
+       "<caption>OLS Regression Results</caption>\n",
+       "<tr>\n",
+       "  <th>Dep. Variable:</th>            <td>Y</td>        <th>  R-squared:         </th> <td>   0.600</td>\n",
+       "</tr>\n",
+       "<tr>\n",
+       "  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.467</td>\n",
+       "</tr>\n",
+       "<tr>\n",
+       "  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   4.500</td>\n",
+       "</tr>\n",
+       "<tr>\n",
+       "  <th>Date:</th>             <td>Wed, 21 Aug 2024</td> <th>  Prob (F-statistic):</th>  <td> 0.124</td> \n",
+       "</tr>\n",
+       "<tr>\n",
+       "  <th>Time:</th>                 <td>16:40:29</td>     <th>  Log-Likelihood:    </th> <td> -5.2598</td>\n",
+       "</tr>\n",
+       "<tr>\n",
+       "  <th>No. Observations:</th>      <td>     5</td>      <th>  AIC:               </th> <td>   14.52</td>\n",
+       "</tr>\n",
+       "<tr>\n",
+       "  <th>Df Residuals:</th>          <td>     3</td>      <th>  BIC:               </th> <td>   13.74</td>\n",
+       "</tr>\n",
+       "<tr>\n",
+       "  <th>Df Model:</th>              <td>     1</td>      <th>                     </th>     <td> </td>   \n",
+       "</tr>\n",
+       "<tr>\n",
+       "  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>   \n",
+       "</tr>\n",
+       "</table>\n",
+       "<table class=\"simpletable\">\n",
+       "<tr>\n",
+       "    <td></td>       <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  \n",
+       "</tr>\n",
+       "<tr>\n",
+       "  <th>const</th> <td>    2.2000</td> <td>    0.938</td> <td>    2.345</td> <td> 0.101</td> <td>   -0.785</td> <td>    5.185</td>\n",
+       "</tr>\n",
+       "<tr>\n",
+       "  <th>X</th>     <td>    0.6000</td> <td>    0.283</td> <td>    2.121</td> <td> 0.124</td> <td>   -0.300</td> <td>    1.500</td>\n",
+       "</tr>\n",
+       "</table>\n",
+       "<table class=\"simpletable\">\n",
+       "<tr>\n",
+       "  <th>Omnibus:</th>       <td>   nan</td> <th>  Durbin-Watson:     </th> <td>   2.017</td>\n",
+       "</tr>\n",
+       "<tr>\n",
+       "  <th>Prob(Omnibus):</th> <td>   nan</td> <th>  Jarque-Bera (JB):  </th> <td>   0.570</td>\n",
+       "</tr>\n",
+       "<tr>\n",
+       "  <th>Skew:</th>          <td> 0.289</td> <th>  Prob(JB):          </th> <td>   0.752</td>\n",
+       "</tr>\n",
+       "<tr>\n",
+       "  <th>Kurtosis:</th>      <td> 1.450</td> <th>  Cond. No.          </th> <td>    8.37</td>\n",
+       "</tr>\n",
+       "</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified."
+      ],
+      "text/latex": [
+       "\\begin{center}\n",
+       "\\begin{tabular}{lclc}\n",
+       "\\toprule\n",
+       "\\textbf{Dep. Variable:}    &        Y         & \\textbf{  R-squared:         } &     0.600   \\\\\n",
+       "\\textbf{Model:}            &       OLS        & \\textbf{  Adj. R-squared:    } &     0.467   \\\\\n",
+       "\\textbf{Method:}           &  Least Squares   & \\textbf{  F-statistic:       } &     4.500   \\\\\n",
+       "\\textbf{Date:}             & Wed, 21 Aug 2024 & \\textbf{  Prob (F-statistic):} &    0.124    \\\\\n",
+       "\\textbf{Time:}             &     16:40:29     & \\textbf{  Log-Likelihood:    } &   -5.2598   \\\\\n",
+       "\\textbf{No. Observations:} &           5      & \\textbf{  AIC:               } &     14.52   \\\\\n",
+       "\\textbf{Df Residuals:}     &           3      & \\textbf{  BIC:               } &     13.74   \\\\\n",
+       "\\textbf{Df Model:}         &           1      & \\textbf{                     } &             \\\\\n",
+       "\\textbf{Covariance Type:}  &    nonrobust     & \\textbf{                     } &             \\\\\n",
+       "\\bottomrule\n",
+       "\\end{tabular}\n",
+       "\\begin{tabular}{lcccccc}\n",
+       "               & \\textbf{coef} & \\textbf{std err} & \\textbf{t} & \\textbf{P$> |$t$|$} & \\textbf{[0.025} & \\textbf{0.975]}  \\\\\n",
+       "\\midrule\n",
+       "\\textbf{const} &       2.2000  &        0.938     &     2.345  &         0.101        &       -0.785    &        5.185     \\\\\n",
+       "\\textbf{X}     &       0.6000  &        0.283     &     2.121  &         0.124        &       -0.300    &        1.500     \\\\\n",
+       "\\bottomrule\n",
+       "\\end{tabular}\n",
+       "\\begin{tabular}{lclc}\n",
+       "\\textbf{Omnibus:}       &    nan & \\textbf{  Durbin-Watson:     } &    2.017  \\\\\n",
+       "\\textbf{Prob(Omnibus):} &    nan & \\textbf{  Jarque-Bera (JB):  } &    0.570  \\\\\n",
+       "\\textbf{Skew:}          &  0.289 & \\textbf{  Prob(JB):          } &    0.752  \\\\\n",
+       "\\textbf{Kurtosis:}      &  1.450 & \\textbf{  Cond. No.          } &     8.37  \\\\\n",
+       "\\bottomrule\n",
+       "\\end{tabular}\n",
+       "%\\caption{OLS Regression Results}\n",
+       "\\end{center}\n",
+       "\n",
+       "Notes: \\newline\n",
+       " [1] Standard Errors assume that the covariance matrix of the errors is correctly specified."
+      ],
+      "text/plain": [
+       "<class 'statsmodels.iolib.summary.Summary'>\n",
+       "\"\"\"\n",
+       "                            OLS Regression Results                            \n",
+       "==============================================================================\n",
+       "Dep. Variable:                      Y   R-squared:                       0.600\n",
+       "Model:                            OLS   Adj. R-squared:                  0.467\n",
+       "Method:                 Least Squares   F-statistic:                     4.500\n",
+       "Date:                Wed, 21 Aug 2024   Prob (F-statistic):              0.124\n",
+       "Time:                        16:40:29   Log-Likelihood:                -5.2598\n",
+       "No. Observations:                   5   AIC:                             14.52\n",
+       "Df Residuals:                       3   BIC:                             13.74\n",
+       "Df Model:                           1                                         \n",
+       "Covariance Type:            nonrobust                                         \n",
+       "==============================================================================\n",
+       "                 coef    std err          t      P>|t|      [0.025      0.975]\n",
+       "------------------------------------------------------------------------------\n",
+       "const          2.2000      0.938      2.345      0.101      -0.785       5.185\n",
+       "X              0.6000      0.283      2.121      0.124      -0.300       1.500\n",
+       "==============================================================================\n",
+       "Omnibus:                          nan   Durbin-Watson:                   2.017\n",
+       "Prob(Omnibus):                    nan   Jarque-Bera (JB):                0.570\n",
+       "Skew:                           0.289   Prob(JB):                        0.752\n",
+       "Kurtosis:                       1.450   Cond. No.                         8.37\n",
+       "==============================================================================\n",
+       "\n",
+       "Notes:\n",
+       "[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n",
+       "\"\"\""
+      ]
+     },
+     "execution_count": 29,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "#Basit bir doğrusal regresyon modeli oluşturmak ve fit etmek için Statsmodels kullanabilirsiniz.\n",
+    "import statsmodels.api as sm\n",
+    "import pandas as pd\n",
+    "from warnings import filterwarnings\n",
+    "filterwarnings('ignore')\n",
+    "# Örnek veri seti\n",
+    "data = {'X': [1, 2, 3, 4, 5], 'Y': [2, 4, 5, 4, 5]}\n",
+    "df = pd.DataFrame(data)\n",
+    "\n",
+    "# Bağımsız değişken (X) ve bağımlı değişken (Y),dataframe haline getirdik\n",
+    "X = df['X']\n",
+    "Y = df['Y']\n",
+    "\n",
+    "# Sabit terimi ekleme\n",
+    "X = sm.add_constant(X)\n",
+    "\n",
+    "# OLS modeli oluşturma ve fit etme\n",
+    "\n",
+    "model = sm.OLS(Y, X)\n",
+    "results = model.fit() #####!!!!!!! yukarı da oluşturduğun modeli verilerine fit etmelisin\n",
+    "results.summary()\n",
+    "\n",
+    "###F-istatistiği ve p-değeri(veya prob) Nedir?\n",
+    "#F-istatistiği: Modelin açıklama gücünü ölçen bir istatistiktir. Regresyon modelinin genel anlamlılığını test etmek için kullanılır.\n",
+    "#F-istatistiği, modelin bağımsız değişkenlerinin bağımlı değişken üzerindeki etkisinİ gösterir\n",
+    "#p-değeri: F-istatistiğinin anlamlılığını test eder. Küçük bir p-değeri (genellikle 0.05'in altında), \n",
+    "#modeldeki bağımsız değişkenlerin bağımlı değişken üzerindeki etkisinin istatistiksel olarak anlamlı olduğunu gösterir."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 33,
+   "id": "f72a96ab-dd92-4b98-ac19-86cdcbb30e9c",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "const    2.2\n",
+       "X        0.6\n",
+       "dtype: float64"
+      ]
+     },
+     "execution_count": 33,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "results.params"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 63,
+   "id": "1b9adeff-ab4b-4705-8c59-ad795a88ef97",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "sales=2.20+X*0.60\n"
+     ]
+    }
+   ],
+   "source": [
+    "#modelin fonksiyonu\n",
+    "print(\"sales=\"+str(\"%.2f\" % results.params[0]+\"+X\"+\"*\"+str(\"%.2f\" % results.params[1])))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 37,
+   "id": "8c176df8-4e31-46ef-a119-ac08c8bce45c",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<table class=\"simpletable\">\n",
+       "<tr>\n",
+       "    <td></td>       <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  \n",
+       "</tr>\n",
+       "<tr>\n",
+       "  <th>const</th> <td>    2.2000</td> <td>    0.938</td> <td>    2.345</td> <td> 0.101</td> <td>   -0.785</td> <td>    5.185</td>\n",
+       "</tr>\n",
+       "<tr>\n",
+       "  <th>X</th>     <td>    0.6000</td> <td>    0.283</td> <td>    2.121</td> <td> 0.124</td> <td>   -0.300</td> <td>    1.500</td>\n",
+       "</tr>\n",
+       "</table>"
+      ],
+      "text/latex": [
+       "\\begin{center}\n",
+       "\\begin{tabular}{lcccccc}\n",
+       "\\toprule\n",
+       "               & \\textbf{coef} & \\textbf{std err} & \\textbf{t} & \\textbf{P$> |$t$|$} & \\textbf{[0.025} & \\textbf{0.975]}  \\\\\n",
+       "\\midrule\n",
+       "\\textbf{const} &       2.2000  &        0.938     &     2.345  &         0.101        &       -0.785    &        5.185     \\\\\n",
+       "\\textbf{X}     &       0.6000  &        0.283     &     2.121  &         0.124        &       -0.300    &        1.500     \\\\\n",
+       "\\bottomrule\n",
+       "\\end{tabular}\n",
+       "\\end{center}"
+      ],
+      "text/plain": [
+       "<class 'statsmodels.iolib.table.SimpleTable'>"
+      ]
+     },
+     "execution_count": 37,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "results.summary().tables[1] #katsayılara erişebiliyorum"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 53,
+   "id": "988b28a7-fb2d-410b-a0d9-a37274acd85b",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>0</th>\n",
+       "      <th>1</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>const</th>\n",
+       "      <td>-0.785399</td>\n",
+       "      <td>5.185399</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>X</th>\n",
+       "      <td>-0.300132</td>\n",
+       "      <td>1.500132</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "              0         1\n",
+       "const -0.785399  5.185399\n",
+       "X     -0.300132  1.500132"
+      ]
+     },
+     "execution_count": 53,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "results.conf_int()#katsayıların güven aralığı"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 45,
+   "id": "d5a49581-8a91-484d-b4df-643b031d9625",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "f_pvalue:  0.1240\n",
+      "fvalue:  4.50\n"
+     ]
+    }
+   ],
+   "source": [
+    "results.f_pvalue#modelin anlamlılık değeri\n",
+    "print(\"f_pvalue: \", \"%.4f\" % results.f_pvalue) ##p value\n",
+    "print(\"fvalue: \", \"%.2f\" % results.fvalue) #f value\n",
+    "print(\"tvalue: \", \"%.2f\" % results.tvalues[0:1]) #t value"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 47,
+   "id": "6f01edc5-a6eb-4855-ae38-7a1adc783ce4",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "3.6000000000000005"
+      ]
+     },
+     "execution_count": 47,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "results.mse_model### birim basına yapılıcak hata"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 49,
+   "id": "6e83f811-c0de-4908-a879-1adcb9bd8262",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "0    2.8\n",
+       "1    3.4\n",
+       "2    4.0\n",
+       "3    4.6\n",
+       "4    5.2\n",
+       "dtype: float64"
+      ]
+     },
+     "execution_count": 49,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "results.fittedvalues[0:5] #modelin tahmin ettipği değerler"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 55,
+   "id": "447d8bac-6763-40a4-beb0-c9db7fb4c02a",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "0    2\n",
+       "1    4\n",
+       "2    5\n",
+       "3    4\n",
+       "4    5\n",
+       "Name: Y, dtype: int64"
+      ]
+     },
+     "execution_count": 55,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "Y[0:5] # bu gercek değeri"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "id": "7daba043-6e13-4729-ad64-1686a3be979a",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#LOJİSTİK REGRESYON İÇİN"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 19,
+   "id": "20e6c0da-223d-44f1-913f-85561f6e2b9c",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Warning: Maximum number of iterations has been exceeded.\n",
+      "         Current function value: 0.000000\n",
+      "         Iterations: 35\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Örnek veri seti\n",
+    "data = {'X1': [1, 2, 3, 4, 5], 'X2': [2, 4, 5, 3, 4], 'Y': [0, 0, 1, 1, 1]}\n",
+    "df = pd.DataFrame(data)\n",
+    "\n",
+    "# Bağımsız değişkenler (X1, X2) ve bağımlı değişken (Y)\n",
+    "X = df[['X1', 'X2']]\n",
+    "Y = df['Y']\n",
+    "\n",
+    "# Sabit terimi ekleme\n",
+    "X = sm.add_constant(X)\n",
+    "\n",
+    "# Lojistik regresyon modeli oluşturma ve fit etme\n",
+    "model = sm.Logit(Y, X)\n",
+    "results = model.fit()\n",
+    "\n",
+    "# Model sonuçlarını özetleme\n",
+    "#print(results.summary())\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "627f0165-bcf0-4021-815b-2215e1806b66",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.12.4"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
